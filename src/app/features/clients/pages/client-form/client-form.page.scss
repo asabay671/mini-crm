@@ -1,0 +1,102 @@
+$primary-color: #ac3030; 
+$warn-color: #ef5350; 
+$form-bg: #ffffff;
+$form-shadow: rgba(0, 0, 0, 0.1);
+$error-color: #ef5350;
+$border-radius: 12px;
+
+.client-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: $form-bg;
+  border-radius: $border-radius;
+  box-shadow: 0 8px 20px $form-shadow;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h1 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: $primary-color;
+  }
+
+  .full-width {
+    width: 100%;
+
+    mat-form-field {
+      width: 100%;
+
+      .mat-form-field-label {
+        font-weight: 500;
+      }
+
+      .mat-input-element {
+        padding: 12px 0;
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+
+      &.mat-focused .mat-form-field-ripple {
+        background-color: $primary-color;
+      }
+
+      mat-error {
+        font-size: 12px;
+        color: $error-color;
+        margin-top: 2px;
+        display: block;
+      }
+    }
+  }
+
+  .button-row {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+
+    button {
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    button[color="warn"] {
+      background-color: $warn-color;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background-color: darken($warn-color, 8%);
+      }
+    }
+
+    button[color="primary"] {
+      background-color: $primary-color;
+      color: #fff;
+
+      &:hover:not(:disabled) {
+        background-color: darken($primary-color, 6%);
+      }
+    }
+  }
+}
+
+mat-form-field.mat-focused .mat-form-field-outline {
+  border-color: $primary-color;
+}
+
+.mat-input-element.ng-invalid.ng-touched {
+  border-bottom: 2px solid $error-color;
+}
