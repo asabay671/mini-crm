@@ -1,0 +1,53 @@
+<h1>Clients</h1>
+
+
+<mat-form-field appearance="outline" style="width:100%">
+  <mat-label>Поиск клиента</mat-label>
+  <input matInput [formControl]="searchControl" placeholder="Name, email or phone">
+</mat-form-field>
+
+<button mat-raised-button color="primary" class="add-client" (click)="createClient()"> Добавить клиента </button>
+
+
+<mat-list>
+
+  <ng-container *ngFor="let client of filteredClients$ | async; trackBy: trackById">
+
+    <mat-list-item>
+
+      <div style="width:100%; display:flex; justify-content:space-between; align-items:center">
+
+        <div>
+          <div><strong>{{ client.name }}</strong></div>
+          <div>{{ client.email }}</div>
+          <div>{{ client.phone }}</div>
+        </div>
+
+        <div>
+
+          <button mat-icon-button class="edit-btn" (click)="editClient(client.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button  class="delete-btn" (click)="deleteClient(client.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </div>
+
+      </div>
+
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+
+  </ng-container>
+
+</mat-list>
+
+<div *ngIf="(filteredClients$ | async)?.length === 0">
+  Клиенты не найдены
+</div>
+
+
+

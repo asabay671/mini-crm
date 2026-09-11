@@ -1,0 +1,54 @@
+<h1>{{ id ? 'Edit Client' : 'New Client' }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="save()" class="client-form">
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Имя</mat-label>
+    <input matInput formControlName="name" placeholder="Впишите имя" />
+    <mat-error *ngIf="name.touched && name.errors?.['required']">
+      Необходимо заполнить поле!
+    </mat-error>
+    <mat-error *ngIf="name.touched && name.errors?.['minlength']">
+      Имя должно иметь больше 2-х символов!
+    </mat-error>
+    <mat-error *ngIf="name.touched && name.errors?.['maxlength']">
+      Слишком длинное имя!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" placeholder="Впишите email" />
+    <mat-error *ngIf="email.touched && email.errors?.['required']">
+      Необходимо заполнить поле!
+    </mat-error>
+    <mat-error *ngIf="email.touched && email.errors?.['email']">
+      Неверный Email адрес!
+    </mat-error>
+    <mat-error *ngIf="email.touched && email.errors?.['maxlength']">
+      Слишком длинный Email адрес!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Телефон</mat-label>
+    <input matInput formControlName="phone" placeholder="+79228228228" />
+    <mat-error *ngIf="phone.touched && phone.errors?.['required']">
+      Необходимо заполнить поле!
+    </mat-error>
+    <mat-error *ngIf="phone.touched && phone.errors?.['invalidPhone']">
+      Неверный номер телефона!
+    </mat-error>
+  </mat-form-field>
+
+  <div class="button-row">
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Сохранить
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="router.navigate(['/clients'])">
+      Отмена
+    </button>
+  </div>
+
+</form>
+
